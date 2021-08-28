@@ -174,7 +174,22 @@ function setupHDRI(path, name) {
 }
 
 function importGltfModel(path) {
-  const gltfLoader = new GLTFLoader();
+  var manager = new THREE.LoadingManager();
+
+    manager.onStart = function (item, loaded, total) {
+        document.getElementById("loading").style.display = "block";
+    };
+
+    manager.onLoad = function () {
+        document.getElementById("loading").style.display = "none";          
+    };
+
+    manager.onProgress = function (item, loaded, total) {            
+        document.getElementById("loading").style.display = "block";                  
+    };
+
+  
+  const gltfLoader = new GLTFLoader(manager);
   gltfLoader.load(path, (loadedModel) => {
     mainScene = loadedModel.scene;
     mainScene.traverse(function (child) {
@@ -205,7 +220,7 @@ function RaycasterOnMouseDown(event) {
 
   if (intersects.length > 0) {
     if (intersects[0].object) {
-      console.log(intersects[0].object.name);      
+      // console.log(intersects[0].object.name);      
       // intersects[0].object.material.color.setHex(0xffff00);
       // console.log(intersects[0].object.material.color.getHex());
     }
