@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>ARCommerce Assistant</title>
+
+  <!-- Main CSS-->
+  <link rel="stylesheet" href="css/main.css" />
+
+  <!-- Bootstrap CDN -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+
+<body onload="move()">
+  <div id="myProgress">
+    <div id="myBar">2%</div>
+  </div>
+
+  <div class="container" id="productList" style="display: none;">
+
+    <nav class="navbar navbar-dark bg-dark">
+      <!-- Navbar content -->
+      <a href="index.html"><span class="navbar-brand mb-0 h1">ARCommerce Assistant</span></a>
+    </nav>
+    
+    <div class="row">
+      <div class="col">
+        <div class="card">
+          <img src="/img/Product_Thumbnails/artisian_ceramic_vase.png" alt="artisian vase" style="width:100%">
+          <h4 class="cardtitle">Artisian Vase</h4>
+          <button onclick="SetData(001)" class="btn btn-lg btn-block btn-dark">View Product</button>
+        </div>
+      </div>
+      
+      <div class="col">
+        <div class="card">
+          <span class="badge badge-pill badge-primary">Direct Sale</span>
+          <img src="/img/Product_Thumbnails/ottoman.png" alt="ottoman" style="width:100%">
+          <h4 class="cardtitle">Leather Storage Ottoman</h4>
+          <button onclick="SetData(002)" class="btn btn-lg btn-block btn-dark">View Product</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <div class="card">
+          <img src="/img/Product_Thumbnails/ukulele.png" alt="ukulele" style="width:100%">
+          <h4 class="cardtitle">Cordoba Concert Ukulele</h4>
+          <button onclick="SetData(003)" class="btn btn-lg btn-block btn-dark">View Product</button>
+        </div>
+      </div>
+      
+      <div class="col">
+        <div class="card">
+          <img src="/img/Product_Thumbnails/Chesterfield_Loveseat_Sofa.png" alt="loveseat sofa" style="width:100%">
+          <h4 class="cardtitle">Chesterfield Loveseat Sofa</h4>
+          <button onclick="SetData(004)" class="btn btn-lg btn-block btn-dark">View Product</button>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+  <script>
+    //Loading screen for fetching content from backend
+    var i = 0;
+    function move() {
+      if (i == 0) {
+        i = 1;
+        var elem = document.getElementById("myBar");
+        var width = 10;
+        var id = setInterval(frame, 10);
+        function frame() {
+          if (width >= 100) {
+            clearInterval(id);
+            document.getElementById("myBar").style.display = "none";
+            document.getElementById("productList").style.display = "block";
+            i = 0;
+          } else {
+            width++;
+            elem.style.width = width + "%";
+            elem.innerHTML = width + "%";
+          }
+        }
+      }
+    }
+  </script>
+
+    
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script type="text/javascript" src="js/dataparser.js"></script>
+</body>
+
+</html>

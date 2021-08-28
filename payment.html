@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title>ARCommerce Assistant</title>
+
+    <!-- Main CSS-->
+    <link rel="stylesheet" href="css/main.css" />
+
+    <!-- Bootstrap CDN -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+  </head>
+
+  <body onload="StartPaymentProcess()">
+    <div id="paymentProcessing" style="display: block;">
+        <p>Processing payment with Circle API</p>
+        <div class="paymentLoader"></div>
+    </div>  
+
+    <div id="paymentSuccess"  style="display: none;">
+        <p>Payment successful</p>
+        <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+            <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
+            <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+          </svg>
+          <a href="index.html"><button type="button" class="btn btn-link">Continue shopping</button></a>    
+    </div>  
+    
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+
+    <script>
+        function StartPaymentProcess(){
+            setTimeout("sendJSON()", 2000);
+        }
+      function sendJSON() {
+          
+        // Creating a XHR object
+        let xhr = new XMLHttpRequest();
+        let url = "https://api-sandbox.circle.com/v1/cards/";
+
+        // open a connection
+        xhr.open("GET", url, true);
+
+        xhr.onprogress = function () {
+          document.getElementById("paymentProcessing").style.display = "block";
+          document.getElementById("paymentSuccess").style.display = "none";
+        };
+
+        // Set the request header i.e. which type of content you are sending
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.setRequestHeader(
+          "Authorization",
+          "Bearer QVBJX0tFWTplNTJkZjNkMzE4NzM3OTY3MmEwNjVlYTk3ZDRhMGVlMDo4ZGMzN2NiMmI5NzBhNWNkMWM5MmQ3NDc4ZWYxZGQ2OQ=="
+        );
+        // Create a state change callback
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+            // Print received data from server
+            console.log(this.responseText);
+            //Success audio
+            var audio = new Audio('resources/audio/payment_success.wav');
+            audio.play();
+            document.getElementById("paymentProcessing").style.display = "none";
+            document.getElementById("paymentSuccess").style.display = "block";
+          }
+        };
+
+        // Converting JSON data to string
+        var data = JSON.stringify("resources/sample_payment.json");
+
+        // Sending data with the request
+        xhr.send(data);
+      }
+    </script>
+  </body>
+</html>

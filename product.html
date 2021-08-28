@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ARCommerce Assistant</title>
+
+    <!-- Main CSS-->
+    <link rel="stylesheet" href="css/main.css" />
+
+    <!-- Bootstrap CDN -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Image and text -->
+        <nav class="navbar navbar-dark bg-dark">
+            <!-- Navbar content -->
+            <a href="index.html"><span class="navbar-brand mb-0 h1">ARCommerce Assistant</span></a>
+          </nav>
+    </div>
+    <div class="container">
+        <div class="card">
+            <img id="productImage" class="card-img-top" alt="Card image cap" />
+
+            <div class="card-body">
+                <h5 id="productName" class="card-title"></h5>
+
+                <div class="card-text" style="overflow: scroll;">
+                    <b>About this item</b>
+                    <pre id="productDescription"></pre>
+                </div>
+
+                <a href="/productViewer/index.html">
+                    <buttontype="button" class="btn btn-dark" style="background-color: black;"><b>Try on AR</b></button>
+                </a>
+
+                <a id="productSite">
+                    <button type="button" id="buyButton" class="btn btn-primary">Buy Product</button>
+                </a>
+            </div>
+        </div>
+        <script>
+            window.addEventListener('load', (event) => {
+                GetData();
+                console.log("Loaded");
+            });
+        </script>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script type="text/javascript" src="js/dataparser.js"></script>
+</body>
+
+</html>
